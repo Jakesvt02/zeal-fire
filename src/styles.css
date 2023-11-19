@@ -1,0 +1,30 @@
+body, html {
+  font-size: 1vw;
+  width: 100%;
+  height: 100%;
+  color: black;
+  background-color: white;
+}
+@media only screen and (orientation: landscape) and (min-width: 1280px) {
+  body, html {
+    font-size: 12.8px;
+  }
+}
+@media screen and (orientation: portrait), screen and (max-width: 600px) {
+  body, html {
+    font-size: 3.33333vw;
+  }
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+#app {
+  background-color: white;
+  font-size: 1rem;
+  line-height: 1.7rem;
+  width: 100%;
+  height: 100%;
+}/*# sourceMappingURL=styles.css.map */
