@@ -40,9 +40,8 @@
 {  
   display: flex;
   flex-flow: column nowrap;
-  // width: 100%;
-  // align-content: center;
   align-items: center;
+  width: 100%;
 
   @include mobile
   {
@@ -55,12 +54,33 @@
 
 .sub
 {
-  width: 100%;
+  margin: 0 auto;
+  width: 85%;
   padding: 1rem;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+
+  @include mobile()
+  {
+    width: 100%;
+  }
 }
+
+// .sub
+// {
+//   // width: 100rem;
+//   width: 100%;
+//   padding: 1rem;
+//   display: flex;
+//   flex-flow: column nowrap;
+//   align-items: center;
+
+//   @include mobile()
+//   {
+//     width: 100%;
+//   }
+// }
 .desktop
 {
   display: flex;
@@ -80,9 +100,16 @@
   color: black;
   text-decoration: none;
   font-family: 'Minion Pro', sans-serif;
-  font-size: 1.5rem;
-}
+  font-size: 1.2rem;
+  text-transform: uppercase;
 
+  &:hover
+  {
+    text-decoration: line-through;
+    transition: .5s ease all;
+    font-weight: bold;
+  } 
+}
 .mobile
 {
   position: absolute;
@@ -149,7 +176,6 @@ li
 .dropdown-nav
 {
   display: block;
-  // flex-flow: column nowrap;
   position: fixed;
   width: 100%;
   left:100%;
@@ -183,12 +209,12 @@ export default {
   data() {
     return {
       navItems: [
-        "Home",
-        "About",
-        "Portfolio",
-        "Services",
-        "Commission",
-        "Contact",
+        "home",
+        "about",
+        "portfolio",
+        "services",
+        "commission",
+        "contact",
       ],
       mobile:null,
       mobileNav:null,
@@ -212,7 +238,7 @@ export default {
     {
       this.windowWidth = window.outerWidth;
       console.log(window.outerWidth);
-      if(this.windowWidth <= 750)
+      if(this.windowWidth <= 850)
       {
         this.mobile = true;
         return;

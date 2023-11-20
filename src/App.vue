@@ -6,39 +6,71 @@ import TopLogo from "./components/TopLogo.vue";
 
 <template>
   <div class="app">
-    <div class="sub">
-      <top-logo></top-logo>
-      <nav-bar></nav-bar>
-      <router-view />
-    </div>
+	<div class="main">
+		<div class="sub">
+			<top-logo></top-logo>
+			<nav-bar></nav-bar>
+			<router-view />
+		</div>
+	</div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 
+@import "styles";
+
 * {
 	margin: 0;
 	padding: 0;
 	border: 0;
-  box-sizing: border-box;
-	font-family: inherit;
+	box-sizing: border-box;
+	font-family: 'Minion Pro', sans-serif;
 	font-weight: inherit;
 	font-size: inherit;
 	color: inherit;
 	scroll-behavior: smooth;
 	border-spacing: 0;
 	border-collapse: separate;
+	overflow-x: hidden;
 }
 
 #app
+{
+	overflow-x: hidden;
+}
+
+.main
+{
+	width: 100%;
+}
+
+// .sub
+// {
+//   margin: 0 auto;
+//   width: 90%;
+//   padding: 1rem;
+//   display: flex;
+//   flex-flow: column nowrap;
+//   align-items: center;
+
+//   @include mobile()
+//   {
+//     width: 100%;
+//   }
+// }
+
+.app
 {
   // width: 100%;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
   width: 100vw;
+  overflow-x: hidden;
   // height: 100vh;
 }
+
 
 div
 {
@@ -50,8 +82,8 @@ div
 
 body
 {
-	overflow-x: hidden;
-	overflow-y: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
   margin: 0;
   padding: 0;
 }

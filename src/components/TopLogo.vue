@@ -2,7 +2,7 @@
     <div class="main">
         <div class="logo_holder">
             <div class="logo">
-                <div class="img"></div>
+                <div class="img_logo"></div>
                 <img src="">
             </div>
         </div>
@@ -19,6 +19,7 @@
     justify-content: center;
     padding-bottom: 2rem;
     padding-top: 2rem;
+    width: 100%;
 
     @include mobile
     {
@@ -52,7 +53,7 @@
     width: 100%;
 }
 
-.img
+.img_logo
 {
     background-image: url("../assets/Asset 11.png");
     background-position: center center;

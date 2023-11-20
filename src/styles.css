@@ -4,6 +4,7 @@ body, html {
   height: 100%;
   color: black;
   background-color: white;
+  font-family: "Minion Pro", sans-serif;
 }
 @media only screen and (orientation: landscape) and (min-width: 1280px) {
   body, html {
@@ -27,4 +28,5 @@ body {
   line-height: 1.7rem;
   width: 100%;
   height: 100%;
+  font-family: "Minion Pro", sans-serif;
 }/*# sourceMappingURL=styles.css.map */
