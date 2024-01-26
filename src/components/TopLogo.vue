@@ -17,7 +17,7 @@
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
     padding-top: 2rem;
     width: 100%;
 
@@ -55,7 +55,7 @@
 
 .img_logo
 {
-    background-image: url("../assets/Asset 11.png");
+    background-image: url("../../public/img/logo_top.png");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: contain;

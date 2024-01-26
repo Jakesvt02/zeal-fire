@@ -1,37 +1,17 @@
 <template>
   <div class="main">
+    <div class="heading_holder">
+      <div class="heading">ABOUT</div>
+    </div>
     <div class="sub">
       <div class="content_holder">
-        <div class="text_holder">
-          <div class="text" v-html="about_us"></div>
-        </div>
         <div class="image_holder">
           <div class="image"></div>
         </div>
       </div>
-      <div class="video_holder">
-        <video class="video" loop autoplay muted >
-          <source class="video_player" src="../../assets/sequence-01_olPUesRa.mp4" type=video/mp4>
-        </video>
-      </div>
-      <div class="holder">
-        <div class="heading">Contact</div>
-        <div class="contact_holder">  
-          <label class="label order_1 mobile_order_1" for="first_name">Name</label>
-          <!-- <label class="label order_2 mobile_order_2" for="last_name">Last Name</label> -->
-          <input class="textbox order_1 mobile_order_1" type="text" id="first_name" placeholder="First Name">
-          <input class="textbox order_2 mobile_order_2" type="text" id="last_name" placeholder="Last Name">
-          <label class="label order_1 mobile_order_3" for="email">Email</label>
-          <input class="textbox order_3 mobile_order_3" type="text" id="email_address" >
-          <label class="label order_1 mobile_order_4" for="subject">Subject</label>
-          <input class="textbox order_3 mobile_order_4" type="text" id="subject" >
-          <label class="label order_1 mobile_order_5" for="message">Message</label>
-          <textarea class="textarea order_3 mobile_order_5" id="message" ></textarea>
-        </div>
-        <div class="button_holder">
-          <button class="button" value="Send">Send</button>
-        </div>
-      </div>
+    </div>
+    <div class="text_holder">
+        <div class="text" v-html="about_us"></div>
     </div>
   </div>
 </template>
@@ -42,22 +22,52 @@
 
 .main
 {
-  width: 100%;
-  padding-top: 2rem;
-}
-
-.sub
-{
-  margin: 0 auto;
-  width: 90%;
-  padding: 1rem;
-  display: flex;
-  flex-flow: column nowrap;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-column-gap: 1rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  font-family: 'Minion Pro', sans-serif;
+  justify-content: center;
+  align-content: center;
   align-items: center;
 
   @include mobile()
   {
-    width: 100%;
+    grid-template-columns: 1fr;
+  }
+  // width: 100%;
+  // padding-top: 2rem;
+}
+
+.heading_holder
+{
+  grid-column: 1 / 4;
+  background-color: rgba(237, 189, 174, 0.20);
+  margin-bottom: 3rem;
+}
+
+.heading
+{
+  font-weight: bold;
+  font-size: 1.5rem;
+  padding: 1rem;
+  grid-column: 2;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.sub
+{
+  grid-column: 2;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-flow: column nowrap;
+
+  @include mobile()
+  {
+    grid-column: 1;
   }
 }
 
@@ -65,24 +75,32 @@
 {
   width: 100%;
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column nowrap;
+  align-items: center;
 
   @include mobile()
   {
     flex-flow: column nowrap;
     align-content: center;
     align-items: center;
+    // padding-left: 1rem;
+    // padding-right: 1rem;
+    font-size: 1rem;
   }
 }
 
 .text_holder
 {
-  display: flex;
-  flex-flow: column nowrap;
+  // display: flex;
+  // flex-flow: column nowrap;
   text-align: center;
-  width: 50%;
+  width: 100%;
   font-size: 1.2rem;
-  margin-left: 12rem;
+  padding-top: 2rem;
+  // margin-left: 12rem;
+  grid-column: 1 / 4;
+  background-color: rgba(237, 189, 174, 0.20);
+  padding: 1rem;
 
   @include mobile()
   {
@@ -99,9 +117,10 @@
 
 .image_holder
 {
-  width: 50%;
+  width: 100%;
   height: 34rem;
-  margin-right: 3rem;
+  // margin-right: 3rem;
+  margin-bottom: 3rem;
 
   @include mobile()
   {
@@ -118,12 +137,12 @@
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-  background-image: url("../../assets/zane.jpg");
+  background-image: url("../../../public/img/zane.jpg");
 }
 
 .video_holder
 {
-  padding-top: 2rem;
+  padding-top: 4rem;
   padding-bottom: 2rem;
   display: flex;
   flex-flow: column nowrap;
@@ -132,15 +151,20 @@
 
   @include mobile()
   {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    padding-top: 2rem;
+    // padding-bottom: 2rem;
   }
 }
 
 
 .video
 {
-  width: 45%;
+  width: 60%;
+
+  @include mobile()
+  {
+    width: 100%;
+  }
 }
 
 .video_player
@@ -148,179 +172,13 @@
   width: 100%;
 }
 
-.holder
-{
-  display: flex;
-  flex-flow: column nowrap;
-  width: 100%;
-  align-items: center;
-  align-content: center;
-}
-.contact_holder
-{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  width: 45%;
-  grid-column-gap: 2rem;
-  grid-row-gap: 1rem;
-
-  @include mobile()
-  {
-    grid-template-columns: 1fr;
-  }
-
-}
-
-.heading
-{
-  margin-bottom: 2rem;
-  font-weight: bold;
-  border-radius: 0.5rem;
-  width: 45%;
-  text-align: center;
-  padding: 0.5rem;
-  margin-top: 2rem;
-}
-
-.spacer
-{
-  width: 55%;
-}
-
-.name_holder
-{
-
-}
-
-.label
-{
-  font-weight: bold;
-}
-
-.order_1
-{
-  grid-column: 1;
-
-  @include mobile()
-  {
-    grid-column: 1;
-  }
-}
-
-.mobile_order_1
-{
-  // display: none;
-
-  @include mobile()
-  {
-    order: 1;
-  }
-}
-
-.mobile_order_2
-{
-  // display: none;
-
-  @include mobile()
-  {
-    order: 2;
-  }
-}
-.mobile_order_3
-{
-  // display: none;
-
-  @include mobile()
-  {
-    order: 3;
-  }
-}
-
-.mobile_order_4
-{
-  // display: none;
-
-  @include mobile()
-  {
-    order: 4;
-  }
-}
-
-.mobile_order_5
-{
-  // display: none;
-
-  @include mobile()
-  {
-    order: 5;
-  }
-}
-
-.order_2
-{
-  grid-column: 2;
-
-  @include mobile()
-  {
-    grid-column: 1;
-  }
-}
-
-.order_3
-{
-  grid-column:1 / 3;
-
-  @include mobile()
-  {
-    grid-column: 1;
-  }
-}
-.textbox, .textarea
-{
-  border: 0.5px solid grey;
-  // border-radius: 0.2rem;
-  background-color: lightgrey;
-  // text-align: center;
-  padding-inline-start: 0.2rem;
-  text-transform: uppercase;
-  height: 3rem;
-  vertical-align: middle;
-  box-shadow: 1px solid grey;
-  font-size: 0.7rem;
-}
-
-.textarea
-{
-  height: 7rem;
-}
-
-.email_holder
-{
-  padding-top: 1rem;
-  width: 100%;
-}
-
-.button_holder
-{
-  width: 100%;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  padding-top: 2rem;
-}
-
-.button
-{
-  padding: 0.5rem;
-  width: 5%;
-  background-color: black;
-  color: white;
-}
-
 </style>
 
 <script>
+// import ContactForm from '../../components/ContactForm.vue'
+
 export default {
+  components: {  },
     name:"about_us",
     data(){
       return{

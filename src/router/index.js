@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/home/HomeView.vue";
+import AboutView from "../views/about/AboutView.vue";
+import ContactView from "../views/contact/ContactView.vue";
+import ServicesView from "../views/services/ServicesView.vue";
 
 const routes = [
   {
@@ -10,17 +13,40 @@ const routes = [
   {
     path: "/about",
     name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/about/AboutView.vue"),
+    component:AboutView,
   },
+  {
+    path: "/service",
+    name: "service",
+    component:ServicesView,
+  },
+  {
+    path:"/contact",
+    name:"contact",
+    component:ContactView,
+  }
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+  scrollBehavior(to, from, next) 
+  {
+    if(next)
+    {
+      return next;
+    }
+    else if(to.hash)
+    {
+      const el = document.getElementById(to.hash.slice(1));
+      if (el) 
+      {
+        el.scrollIntoView({ behavior: 'smooth' });
+        // next(false); // Prevent further navigation
+      }
+    }
+    // next();
+  }
 });
 
 export default router;

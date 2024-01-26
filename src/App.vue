@@ -1,17 +1,17 @@
 <script setup>
 import NavBar from "./components/NavigationBar.vue";
 import TopLogo from "./components/TopLogo.vue";
+import FooterBottom from "./components/FooterBottom.vue"
 
 </script>
 
 <template>
   <div class="app">
-	<div class="main">
-		<div class="sub">
-			<top-logo></top-logo>
-			<nav-bar></nav-bar>
-			<router-view />
-		</div>
+	<div class="main_app">
+		<top-logo></top-logo>
+		<nav-bar></nav-bar>
+		<router-view />
+		<footer-bottom />
 	</div>
   </div>
 </template>
@@ -20,73 +20,37 @@ import TopLogo from "./components/TopLogo.vue";
 
 @import "styles";
 
-* {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	box-sizing: border-box;
-	font-family: 'Minion Pro', sans-serif;
-	font-weight: inherit;
-	font-size: inherit;
-	color: inherit;
-	scroll-behavior: smooth;
-	border-spacing: 0;
-	border-collapse: separate;
-	overflow-x: hidden;
-}
-
-#app
+.app
 {
-	overflow-x: hidden;
-}
-
-.main
-{
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
 	width: 100%;
 }
 
-// .sub
-// {
-//   margin: 0 auto;
-//   width: 90%;
-//   padding: 1rem;
-//   display: flex;
-//   flex-flow: column nowrap;
-//   align-items: center;
-
-//   @include mobile()
-//   {
-//     width: 100%;
-//   }
-// }
-
-.app
+.main_app
 {
-  // width: 100%;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  width: 100vw;
-  overflow-x: hidden;
-  // height: 100vh;
+	width: 100%;
+	// display: grid;
+	// grid-template-columns: 1fr 3fr 1fr;
+
+	@include mobile()
+	{
+		// padding-left: 1rem;
+		// padding-right: 1rem;
+	}
 }
 
-
-div
+.sub
 {
-  margin: 0;
-  padding: 0;
-  // overflow-x: hidden;
-	// overflow-y: scroll;
+	width: 98rem;
+
+	@include mobile()
+	{
+		width: 100%;
+	}
 }
 
-body
-{
-  overflow-x: hidden;
-  overflow-y: scroll;
-  margin: 0;
-  padding: 0;
-}
 
 @mixin landscape
 {

@@ -3,7 +3,7 @@
     <div class="sub">
       <div v-show="!mobile" class="desktop">
         <div class="menu_holder" v-for="nav in navItems" :key="nav">
-          <router-link :to="nav" class="item"> {{ nav }} </router-link>
+          <router-link :to="nav.nav" class="item"> {{ nav.caption }} </router-link>
         </div>
       </div>
       <div v-show="mobile" class="mobile">
@@ -23,10 +23,10 @@
             </div> -->
             <router-link class="link" @click="toggleMobileView" to="home">Home</router-link>
             <router-link class="link" @click="toggleMobileView" to="about">About</router-link>
-            <router-link class="link" to="portfolio">Portfolio</router-link>
-            <router-link class="link" to="Services">Services</router-link>
-            <router-link class="link" to="Commission">Commission</router-link>
-            <router-link class="link" to="Contact">Contact</router-link>
+            <!-- <router-link class="link" @click="toggleMobileView" to="portfolio">Portfolio</router-link> -->
+            <router-link class="link" @click="toggleMobileView" to="service">Services</router-link>
+            <router-link class="link" @click="toggleMobileView" to="commission">Commission</router-link>
+            <router-link class="link" @click="toggleMobileView" to="contact">Contact</router-link>
           </ul>
         </transition>  
       </div>
@@ -39,27 +39,21 @@
 .main
 {  
   display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  width: 100%;
+  justify-content: center;
+  align-content: center;
 
   @include mobile
   {
-      display: flex;
-      flex-flow: column nowrap;
-      width: 100%;
-      align-items: center;
+      
   }
 }
 
+
 .sub
 {
-  margin: 0 auto;
-  width: 85%;
-  padding: 1rem;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
+  width: 98rem;
+  // grid-column: 2;
+  // width: 100%;
 
   @include mobile()
   {
@@ -67,20 +61,6 @@
   }
 }
 
-// .sub
-// {
-//   // width: 100rem;
-//   width: 100%;
-//   padding: 1rem;
-//   display: flex;
-//   flex-flow: column nowrap;
-//   align-items: center;
-
-//   @include mobile()
-//   {
-//     width: 100%;
-//   }
-// }
 .desktop
 {
   display: flex;
@@ -92,7 +72,7 @@
 
 .menu_holder
 {
-  width: 100%;
+  // width: 100%;
 }
 
 .item
@@ -152,8 +132,8 @@ li
 {
   display: flex;
   align-items: center;
-  position: absolute;
-  top: 0;
+  position: fixed;
+  // top: 0;
   right: 24px;
   color: black;
   z-index: 1000;
@@ -209,12 +189,12 @@ export default {
   data() {
     return {
       navItems: [
-        "home",
-        "about",
-        "portfolio",
-        "services",
-        "commission",
-        "contact",
+        {"caption":"home", "nav":"home"},
+        {"caption":"about", "nav":"about"},
+        {"caption":"service", "nav":"service"},
+        // {"caption":"portfolio", "nav":"portfolio"},
+        {"caption":"comission", "nav":"comission"},
+        {"caption":"contact", "nav":"contact"},
       ],
       mobile:null,
       mobileNav:null,
