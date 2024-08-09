@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="heading_holder">
-      <div class="heading">ABOUT</div>
+      <div class="heading">About</div>
     </div>
     <div class="sub">
       <div class="content_holder">

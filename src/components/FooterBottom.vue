@@ -141,6 +141,7 @@ export default {
         window.open("mailto:zeal.n.fire@gmail.com");
         // var x=window.open("mailto:zeal.n.fire@gmail.com");
         // x.close();
+        // location.href = "mailto:"+emailTo+'?cc='+emailCC+'&subject='+emailSub+'&body='+emailBody;
     }
   }
 };

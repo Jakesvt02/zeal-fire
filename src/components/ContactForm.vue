@@ -51,6 +51,7 @@
   text-align: center;
   font-size: 1.5rem;
 }
+
 .contact_holder
 {
   display: grid;
@@ -79,6 +80,11 @@
 .label
 {
   font-weight: bold;
+}
+
+input::placeholder
+{
+  text-align: center;
 }
 
 .order_1
