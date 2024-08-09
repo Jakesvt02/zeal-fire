@@ -3,8 +3,15 @@ import HomeView from "../views/home/HomeView.vue";
 import AboutView from "../views/about/AboutView.vue";
 import ContactView from "../views/contact/ContactView.vue";
 import ServicesView from "../views/services/ServicesView.vue";
+import ShopView from "@/views/shop/ShopView.vue";
+import GalleryView from "@/views/gallery/GalleryView.vue";
 
 const routes = [
+  {
+    path: "/",
+    name: "",
+    component: HomeView,
+  },
   {
     path: "/home",
     name: "home",
@@ -24,6 +31,16 @@ const routes = [
     path:"/contact",
     name:"contact",
     component:ContactView,
+  },
+  {
+    path:"/shop",
+    name:"shop",
+    component:ShopView
+  },
+  {
+    path:"/gallery",
+    name:"gallery",
+    component:GalleryView
   }
 ];
 
