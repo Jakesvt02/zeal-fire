@@ -1,130 +1,334 @@
 <template>
-  <div class="main">
-    <div class="heading_holder">
-        <div class="heading">Services</div>
+  <div class="services-page">
+
+    <!-- Page header -->
+    <div class="page-header">
+      <div v-reveal class="page-header-inner">
+        <span class="label">What we offer</span>
+        <h1>Services</h1>
+        <p>Every piece begins with a conversation. Here's how Zeal &amp; Fire can work with you.</p>
+      </div>
     </div>
-    <div class="content_holder">
-        <div class="sub">
-            <div class="heading_sub">Illuminate the Extraordinary:</div>
-            <div class="content" v-html="content_1"></div>
-            <div class="heading_sub">Custom Art Pieces:</div>
-            <div class="content" v-html="content_2"></div>
-            <div class="heading_sub">Art Consultancy Services:</div>
-            <div class="content" v-html="content_3"></div>
-            <div class="heading_sub">Personalized and Thoughtful Design:</div>
-            <div class="content" v-html="content_4"></div>
-            <div class="heading_sub">Delivery:</div>
-            <div class="content" v-html="content_5"></div>
-        </div>    
+
+    <!-- Service cards -->
+    <section class="cards-section">
+      <div class="cards-grid">
+        <div
+          v-reveal="index * 110"
+          class="service-card"
+          v-for="(s, index) in services"
+          :key="s.title"
+        >
+          <div class="card-rule"></div>
+          <div class="card-number">0{{ index + 1 }}</div>
+          <h2 class="card-title">{{ s.title }}</h2>
+          <p class="card-body">{{ s.body }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="process-section">
+      <div v-reveal class="process-header">
+        <span class="label">The process</span>
+        <h2>How it works</h2>
+      </div>
+      <div class="process-steps">
+        <div v-reveal="index * 120" class="step" v-for="(step, index) in steps" :key="step.title">
+          <div class="step-num">{{ index + 1 }}</div>
+          <h3>{{ step.title }}</h3>
+          <p>{{ step.body }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA banner -->
+    <div v-reveal class="cta-banner">
+      <div class="cta-inner">
+        <h2>Ready to start?</h2>
+        <p>Commissions are open. Reach out and let's create something meaningful together.</p>
+        <router-link to="/contact" class="btn-cta">Get in touch</router-link>
+      </div>
     </div>
+
   </div>
 </template>
 
 <style lang="scss" scoped>
+.label {
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+  display: block;
+  margin-bottom: 0.5rem;
+}
 
-@import "../../styles.scss";
+// ─── Page header ──────────────────────────────────────────────────────────────
 
-.main
-{
-  display: flex;
-  flex-flow: column nowrap;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-  font-family: 'Minion Pro', sans-serif;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-  width: 100%;
+.page-header {
+  background: var(--surface);
+  padding: 5rem 5rem 4rem;
 
-  @include mobile()
-  {
+  @include tablet {
+    padding: 4rem 3rem 3rem;
+  }
+
+  @include mobile {
+    padding: 3rem 1.5rem 2.5rem;
+  }
+}
+
+.page-header-inner {
+  max-width: 60rem;
+
+  h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 300;
+    font-style: italic;
+    margin: 0.4rem 0 1rem;
+    line-height: 1.1;
+  }
+
+  p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 55ch;
+    line-height: 1.8;
+  }
+}
+
+// ─── Service cards ────────────────────────────────────────────────────────────
+
+.cards-section {
+  padding: 5rem 5rem;
+
+  @include tablet {
+    padding: 4rem 3rem;
+  }
+
+  @include mobile {
+    padding: 3rem 1.5rem;
+  }
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+
+  @include tablet {
     grid-template-columns: 1fr;
   }
-  // width: 100%;
-  // padding-top: 2rem;
 }
 
-.heading_holder
-{
-  background-color: rgba(100, 150, 255, 0.20);
-  margin-bottom: 3rem;
-  width: 100%;
+.service-card {
+  background: var(--bg);
+  padding: 3rem 2.5rem;
+
+  @include mobile {
+    padding: 2rem 1.5rem;
+  }
 }
 
-.heading
-{
-  font-weight: bold;
+.card-rule {
+  width: 2.5rem;
+  height: 2px;
+  background: var(--accent);
+  margin-bottom: 1.5rem;
+}
+
+.card-number {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  font-style: italic;
+  color: var(--border);
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+
+.card-title {
+  font-family: var(--font-serif);
   font-size: 1.5rem;
-  padding: 1rem;
-  grid-column: 2;
-  text-align: center;
-  vertical-align: middle;
+  font-style: italic;
+  font-weight: 300;
+  margin-bottom: 1rem;
+  line-height: 1.2;
 }
 
-.content_holder
-{
-    width: 100%;
-    display: flex;
-    flex-flow: column nowrap;
-    padding: 2rem;
-    background-color: rgba(100, 150, 255, 0.20);
-    align-items: center;
+.card-body {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.8;
 }
 
-.sub
-{
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    width: 98rem;
-    text-align: center;
+// ─── Process section ──────────────────────────────────────────────────────────
 
-    @include mobile()
-    { 
-        grid-template-columns: 1fr;
-        width: 100%;
-    }
+.process-section {
+  padding: 5rem 5rem;
+  background: var(--surface);
+
+  @include tablet {
+    padding: 4rem 3rem;
+  }
+
+  @include mobile {
+    padding: 3rem 1.5rem;
+  }
 }
 
-.heading_sub
-{
-    font-weight: bold;
-    font-size: 1.5rem;
-    text-decoration: underline;
-    padding-bottom: 0.5rem;
-    grid-column: 2;
+.process-header {
+  margin-bottom: 3.5rem;
 
-    @include mobile()
-    {
-        grid-column: 1;
-    }
+  h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 300;
+    margin-top: 0.4rem;
+  }
 }
 
-.content
-{
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+
+  @include tablet {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.step {
+  position: relative;
+  padding-left: 1rem;
+  border-left: 2px solid var(--border);
+}
+
+.step-num {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-style: italic;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+
+.step h3 {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin-bottom: 0.6rem;
+}
+
+.step p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.75;
+}
+
+// ─── CTA banner ───────────────────────────────────────────────────────────────
+
+.cta-banner {
+  background: var(--nav-bg);
+  padding: 5rem;
+
+  @include tablet {
+    padding: 4rem 3rem;
+  }
+
+  @include mobile {
+    padding: 3rem 1.5rem;
+  }
+}
+
+.cta-inner {
+  max-width: 55rem;
+
+  h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 3vw, 3rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--nav-text);
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: rgba(250, 247, 242, 0.55);
     font-size: 1rem;
-    grid-column: 2;
-
-    @include mobile()
-    {
-        grid-column: 1;
-    }
+    max-width: 50ch;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
 }
 
+.btn-cta {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  padding: 0.9rem 2.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: background 0.25s;
 
+  &:hover { background: var(--accent-soft); color: var(--text); }
+}
 </style>
 
 <script>
 export default {
-    name:"ServicesView",
-    data(){
-        return{
-            content_1:"We specialize in illuminating elements that others might consider insignificant, capturing mesmerizing visuals in people, wildlife, landscapes, and plant life. By designing and composing the style of your choice through the Adobe Suite, we add character and complementary elements, and edit or omit unwanted elements within reference photos and pictures you provide for producing the art piece.",
-            content_2:"Our services include commissioned art pieces, collaborating with clients to create custom works reflecting their individual style and vision.",
-            content_3:"Zeal & Fire provides art consultancy services, guiding clients in selecting already produced or commissioning artworks that resonate with their aesthetic preferences and values.",
-            content_4:"Our commitment to quality, creativity, and personalized service sets us apart, making Zeal & Fire the ideal partner for those who appreciate finer details and seek to infuse their spaces with meaningful art. Let us transform your ideas into captivating visual narratives.",
-            content_5:"Enjoy a seamless experience as Zeal & Fire crafts your custom art pieces and arrange that they are delivered to your chosen location, ensuring a convenient service experience.",
-            content_6:"Should you desire framing for your artwork, we are more than happy to assist you with arranging suitable frames.",
-        }
-},
-}
+  name: "ServicesView",
+  data() {
+    return {
+      services: [
+        {
+          title: "Commissioned Portraits",
+          body: "From a single person to a full family, each portrait is painted from photo reference or a live sitting session. Capturing not just a likeness, but something true about the subject.",
+        },
+        {
+          title: "Landscapes & Scenes",
+          body: "South African scenes — fynbos, coastline, vineyards, and open skies. Available as bespoke commissions or as adaptations of existing works in the gallery.",
+        },
+        {
+          title: "Pet Portraits",
+          body: "Your beloved animal, immortalised in paint. A thoughtful and lasting tribute, painted with the same care given to every portrait.",
+        },
+        {
+          title: "Custom Art Pieces",
+          body: "Have something specific in mind? Zané collaborates with clients to produce custom works that reflect individual style, vision, and the character of your space.",
+        },
+        {
+          title: "Art Consultancy",
+          body: "Not sure where to start? Get guidance on selecting or commissioning a piece that resonates with your aesthetic preferences and the energy of your space.",
+        },
+        {
+          title: "Delivery",
+          body: "All commissioned pieces are carefully packaged and delivered to your chosen location across South Africa. Framing assistance is also available on request.",
+        },
+      ],
+      steps: [
+        {
+          title: "Share your vision",
+          body: "Send a message with what you have in mind — a reference photo, a space, a feeling. There's no brief too simple or too ambitious.",
+        },
+        {
+          title: "We create together",
+          body: "Zané will sketch a concept and keep you informed throughout the process. You'll have the opportunity to give feedback before the final piece is completed.",
+        },
+        {
+          title: "Delivered to you",
+          body: "Once finished, your piece is carefully packaged and shipped. For local clients, personal delivery or collection is available.",
+        },
+      ],
+    };
+  },
+};
 </script>

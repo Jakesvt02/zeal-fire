@@ -1,32 +1,11 @@
-<script>
-import GalleryImages from '../../components/GalleryImages.vue'
-
-export default ({
-  components: { GalleryImages },
-  name:"gallery",
-    data(){
-        return{
-
-        }
-        
-    },
-})
-</script>
-
-
 <template>
-    <div class="main">
-        <gallery-images />
-    </div>
+  <gallery-images />
 </template>
 
-
-<style lang="scss" scoped>
-
-    .main
-    {
-        width: 100%;
-    }
-
-
-</style>
+<script>
+import GalleryImages from "../../components/GalleryImages.vue";
+export default {
+  name: "GalleryView",
+  components: { GalleryImages },
+};
+</script>

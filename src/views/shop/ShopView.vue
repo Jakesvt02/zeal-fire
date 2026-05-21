@@ -6,14 +6,12 @@
 
 <style lang="scss" scoped>
 
-@import "../../styles.scss";
-
 .main
 {
   display: flex;
   justify-content: center;
   height: 20rem;
-  font-family: 'Minion Pro', sans-serif;
+  font-family: var(--font-serif);
   z-index: 1;
   padding-top: 2.5rem;
   
@@ -21,7 +19,7 @@
 
 .coming_soon
 {
-  font-family: 'Minion Pro', sans-serif;
+  font-family: var(--font-serif);
   display: flex;
   justify-content: center;
   align-items: center;

@@ -7,8 +7,6 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../styles";
-
 .main
 {
     width: 100%;

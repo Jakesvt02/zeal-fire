@@ -1,281 +1,305 @@
 <template>
-  <div class="main" >
-    <div class="sub">
-      <div v-show="!mobile" class="desktop">
-        <div class="menu_holder" v-for="nav in navItems" :key="nav">
-          <router-link :to="nav.nav" class="item"> {{ nav.caption }} </router-link>
-          <div class="dropdown-content" >
-            <router-link :to="item.nav" v-for="item in nav.sub_items" :key="item" class="sub_item"  >{{ item.caption }}</router-link>
+  <div class="nav-wrap">
+
+    <!-- Desktop -->
+    <div v-show="!mobile" class="desktop-nav">
+      <router-link to="/home" class="nav-logo">
+        <span class="brand-name">Zeal &amp; Fire</span>
+        <span class="brand-sub">Where Passion Meets Design and Art</span>
+      </router-link>
+
+      <div class="nav-links">
+        <div class="menu-item" v-for="nav in navItems" :key="nav.nav">
+          <router-link :to="'/' + nav.nav" class="nav-link">{{ nav.caption }}</router-link>
+          <div v-if="nav.sub_items.length" class="dropdown">
+            <router-link
+              :to="'/' + item.nav"
+              v-for="item in nav.sub_items"
+              :key="item.nav"
+              class="dropdown-link"
+            >{{ item.caption }}</router-link>
           </div>
         </div>
       </div>
-      <div v-show="mobile" class="mobile">
-        <!-- <div class="branding">
-          <img src="../assets/Asset 14.png">
-        </div> -->
-        <!-- <button class="hamburger">
-          <div class="bar"></div>
-        </button> -->
-        <div @click="menuOpen" class="icon">
-          <i @click="toggleMobileView" class="fa fas fa-bars" :class="{'icon-active' : mobileNav}"></i>
+    </div>
+
+    <!-- Mobile / Tablet -->
+    <div v-show="mobile" class="mobile-nav">
+      <router-link to="/home" class="nav-logo">
+        <span class="brand-name">Zeal &amp; Fire</span>
+      </router-link>
+
+      <button @click="toggleMobileView" class="hamburger-btn" :aria-label="mobileNav ? 'Close menu' : 'Open menu'">
+        <i class="fa-solid" :class="mobileNav ? 'fa-xmark' : 'fa-bars'"></i>
+      </button>
+    </div>
+
+    <!-- Full-screen overlay -->
+    <transition name="overlay">
+      <div v-if="mobileNav" class="mobile-overlay">
+        <nav class="overlay-nav">
+          <router-link
+            v-for="(link, i) in mobileLinks"
+            :key="link.to"
+            :to="link.to"
+            class="overlay-link"
+            :style="{ transitionDelay: (i * 0.07 + 0.15) + 's' }"
+            @click="toggleMobileView"
+          >{{ link.label }}</router-link>
+        </nav>
+        <div class="overlay-contact">
+          <a href="mailto:zeal.n.fire@gmail.com" class="overlay-email">zeal.n.fire@gmail.com</a>
         </div>
-        <transition name="mobile-nav">
-          <ul id="dropdown-nav"  class="dropdown-nav" >
-            <!-- <div class="branding">
-              <img src="../assets/Asset 14.png">
-            </div> -->
-            <router-link class="link" @click="toggleMobileView" to="home">Home</router-link>
-            <router-link class="link" @click="toggleMobileView" to="gallery">Gallery</router-link>
-            <router-link class="link" @click="toggleMobileView" to="shop">Shop</router-link>
-            <router-link class="link" @click="toggleMobileView" to="service">Services</router-link>
-            <!-- <router-link class="link" @click="toggleMobileView" to="commission">Commission</router-link> -->
-            <router-link class="link" @click="toggleMobileView" to="about">About</router-link>
-            <router-link class="link" @click="toggleMobileView" to="contact">Contact</router-link>
-          </ul>
-        </transition>  
       </div>
-     </div> 
+    </transition>
+
   </div>
 </template>
 
 <style lang="scss" scoped>
-@import "../styles";
-.main
-{  
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  // background-color: #f1f1f1;
+.nav-wrap {
+  background: var(--nav-bg);
+  position: sticky;
+  top: 0;
   z-index: 100;
-
-  @include mobile
-  {
-    background-color: unset;
-  }
-}
-
-
-.sub
-{
-  width: 100rem;
-  padding-bottom: 1rem;
-  padding-top: 1rem;
-  // grid-column: 2;
-  // width: 100%;
-
-  @include mobile()
-  {
-    width: 100%;
-  }
-}
-
-.desktop
-{
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
   width: 100%;
-  text-align: center;
 }
 
-.menu_holder
-{
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  
-  // width: 100%;
+// ─── Desktop ──────────────────────────────────────────────────────────────────
+
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 3rem;
+
+  @include tablet {
+    display: none;
+  }
 }
 
-.item, .sub_item
-{
-  
-  color: black;
-  text-decoration: none;
-  font-family: 'Minion Pro', sans-serif;
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  padding: 1rem;
-  // width: 5rem;
-
-  &:hover
-  {
-    text-decoration: line-through;
-    transition: .5s ease all;
-    font-weight: bold;
-    
-  } 
-}
-
-.sub_item
-{
-  font-size: 0.8rem;
-}
-
-.dropdown-content
-{
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  // min-width: 160px;
-  // box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  // width: 5rem;
-}
-
-// .dropdown-content a:hover {background-color: #ddd;}
-
-.menu_holder:hover .dropdown-content 
-{
+.nav-logo {
   display: flex;
   flex-flow: column;
-  align-items: center;
-  align-content: space-between;
-}
-// .menu_holder:hover .item {background-color: grey;}
-
-.mobile
-{
-  position: absolute;
-  width: 100%;
-  // width: 30rem
-  /* background-color: black; */
-}
-.branding
-{
-  /* background-color: red; */
-}
-
-.navigation
-{
-  display: flex;
-  flex-flow: row nowrap;
-  padding: 12px 0;
-  transition: 0.5s ease all;
-}
-
-li
-{
-  text-transform: uppercase;
-  font-family: 'Minion Pro', sans-serif;
-}
-
-.link
-{
-  color: white;
+  gap: 0.2rem;
+  flex-shrink: 0;
   text-decoration: none;
-  transition: .5s ease all;
-  padding-bottom: 4px;
-
-  &:hover
-  {
-    color: black;
-  } 
 }
 
-.icon
-{
+.brand-name {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--nav-text);
+  letter-spacing: 0.03em;
+  line-height: 1;
+}
+
+.brand-sub {
+  font-family: var(--font-sans);
+  font-size: 0.58rem;
+  font-weight: 300;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(248, 246, 241, 0.4);
+  line-height: 1;
+}
+
+.nav-links {
   display: flex;
   align-items: center;
-  position: fixed;
-  // top: 0;
-  right: 24px;
-  color: black;
-  z-index: 1000;
-  // height: 100%;
+  gap: 0.25rem;
+}
 
-  i
-  {
-    cursor: pointer;
-    font-size: 2rem;
-    transition: .8s ease all;
+.menu-item {
+  position: relative;
+
+  &:hover .dropdown {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
   }
 }
 
-.icon-active
-{
-  transform: rotate(180deg);
-  color: white;
+.nav-link {
+  display: block;
+  color: rgba(248, 246, 241, 0.55);
+  text-decoration: none;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 1.3rem 1.1rem;
+  transition: color 0.2s;
+
+  &:hover,
+  &.router-link-active {
+    color: var(--nav-text);
+  }
 }
 
-.dropdown-nav
-{
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--nav-bg);
+  border-top: 2px solid var(--accent);
+  min-width: 140px;
+  padding: 0.5rem 0;
+}
+
+.dropdown-link {
   display: block;
+  color: rgba(248, 246, 241, 0.55);
+  text-decoration: none;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.2rem;
+  white-space: nowrap;
+  transition: color 0.2s;
+
+  &:hover { color: var(--nav-text); }
+}
+
+// ─── Mobile / Tablet ──────────────────────────────────────────────────────────
+
+.mobile-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+}
+
+.hamburger-btn {
+  background: none;
+  border: none;
+  color: var(--nav-text);
+  font-size: 1.4rem;
+  padding: 0.5rem;
+  line-height: 1;
+  z-index: 600;
+  position: relative;
+}
+
+// ─── Full-screen overlay ──────────────────────────────────────────────────────
+
+.mobile-overlay {
   position: fixed;
-  width: 100%;
-  left:100%;
-  background-color: grey;
-  color: white;
-  padding: 1rem;
-  font-family: 'Minion Pro', sans-serif;
-  transition: 0.5s ease all;
-  z-index: 98;
+  inset: 0;
+  background: var(--nav-bg);
+  z-index: 500;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  padding: 6rem 3rem 4rem;
 }
 
-.dropdown-nav a
-{
+.overlay-nav {
+  display: flex;
+  flex-flow: column;
+  gap: 0.25rem;
+}
+
+.overlay-link {
   display: block;
-  text-align: center;
-  margin: 0 auto;
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(248, 246, 241, 0.4);
+  text-decoration: none;
+  line-height: 1.3;
+  opacity: 0;
+  animation: linkSlideIn 0.4s ease forwards;
+  transition: color 0.25s ease;
+
+  &.router-link-active,
+  &:hover {
+    color: var(--nav-text);
+  }
 }
 
-.dropdown-nav.is-active
-{
-  left:0;
-  transition: 0.5s ease all;
+@keyframes linkSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
+.overlay-contact {
+  margin-top: auto;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
 
+.overlay-email {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(248, 246, 241, 0.3);
+  text-decoration: none;
+  transition: color 0.2s;
+
+  &:hover { color: rgba(248, 246, 241, 0.7); }
+}
+
+// ─── Overlay transition ───────────────────────────────────────────────────────
+
+.overlay-enter-active { transition: opacity 0.3s ease; }
+.overlay-leave-active  { transition: opacity 0.2s ease; }
+.overlay-enter-from,
+.overlay-leave-to      { opacity: 0; }
 </style>
 
 <script>
 export default {
-  name: "naviagtion-bar",
+  name: "NavigationBar",
   data() {
     return {
       navItems: [
-        {"caption":"home", "nav":"home", "sub_items":[
-          {"caption": "gallery","nav": "gallery"},
-          {"caption": "services", "nav":"service"}
+        { caption: "Home",    nav: "home",    sub_items: [
+          { caption: "Gallery",  nav: "gallery" },
+          { caption: "Services", nav: "service" },
         ]},
-        // {"caption":"gallery", "nav":"gallery"},
-        {"caption":"shop", "nav":"shop"},
-        // {"caption":"services", "nav":"service"},
-        // {"caption":"comission", "nav":"comission"},
-        {"caption":"about", "nav":"about"},
-        {"caption":"contact", "nav":"contact"},
+        { caption: "Gallery", nav: "gallery",  sub_items: [] },
+        { caption: "Services", nav: "service", sub_items: [] },
+        { caption: "About",   nav: "about",   sub_items: [] },
+        { caption: "Contact", nav: "contact", sub_items: [] },
       ],
-      mobile:null,
-      mobileNav:null,
-      windowWidth:null,
+      mobile: null,
+      mobileNav: false,
+      mobileLinks: [
+        { label: "Home",     to: "/home" },
+        { label: "Gallery",  to: "/gallery" },
+        { label: "Services", to: "/service" },
+        { label: "About",    to: "/about" },
+        { label: "Contact",  to: "/contact" },
+      ],
     };
   },
-  created()
-  {
-    window.addEventListener('resize', this.checkScreen);
+  created() {
+    window.addEventListener("resize", this.checkScreen);
     this.checkScreen();
   },
-  methods:
-  {
-    toggleMobileView()
-    {
-      var dropdownmenu = document.querySelector('.dropdown-nav');
-      dropdownmenu.classList.toggle('is-active');
+  beforeUnmount() {
+    window.removeEventListener("resize", this.checkScreen);
+  },
+  methods: {
+    toggleMobileView() {
       this.mobileNav = !this.mobileNav;
     },
-    checkScreen()
-    {
-      this.windowWidth = window.outerWidth;
-      console.log(window.outerWidth);
-      if(this.windowWidth <= 850)
-      {
-        this.mobile = true;
-        return;
-      }
-      this.mobile = false;
-      this.mobileNav = false;
-      return;
-    }
-  }
+    checkScreen() {
+      this.mobile = window.innerWidth <= 1024;
+      if (!this.mobile) this.mobileNav = false;
+    },
+  },
 };
 </script>

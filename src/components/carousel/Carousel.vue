@@ -10,9 +10,6 @@
 
 <style lang="scss" scoped>
 
-@import "../../styles";
-
-
 .carousel
 {
     display: flex;
@@ -38,17 +35,9 @@
 {
   position: relative;
   width: 100%;
-  height: 40rem;
+  height: 100%;
+  min-height: 260px;
   overflow: hidden;
-   
-  @include mobile()
-  {
-    // width: 50%;
-    width: 100%;
-    // height: 80%;
-    
-  }
-
 }
 
 </style>

@@ -1,79 +1,49 @@
 <script setup>
 import NavBar from "./components/NavigationBar.vue";
-import TopLogo from "./components/TopLogo.vue";
-import FooterBottom from "./components/FooterBottom.vue"
-
+import FooterBottom from "./components/FooterBottom.vue";
+import CustomCursor from "./components/CustomCursor.vue";
 </script>
 
 <template>
   <div class="app">
-	<div class="main_app">
-		<top-logo></top-logo>
-		<nav-bar></nav-bar>
-		<router-view />
-		<footer-bottom />
-	</div>
+    <custom-cursor />
+    <div class="main_app">
+      <nav-bar></nav-bar>
+      <router-view v-slot="{ Component }">
+        <transition name="page" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
+      <footer-bottom />
+    </div>
   </div>
 </template>
 
+<style lang="scss">
+/* Page transition */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(12px);
+}
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+</style>
+
 <style lang="scss" scoped>
-
-@import "styles";
-
-.app
-{
-	display: flex;
-	flex-flow: column nowrap;
-	align-items: center;
-	width: 100%;
+.app {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: 100%;
 }
 
-.main_app
-{
-	width: 100%;
-	// display: grid;
-	// grid-template-columns: 1fr 3fr 1fr;
-
-	@include mobile()
-	{
-		// padding-left: 1rem;
-		// padding-right: 1rem;
-	}
+.main_app {
+  width: 100%;
 }
-
-.sub
-{
-	width: 98rem;
-
-	@include mobile()
-	{
-		width: 100%;
-	}
-}
-
-
-@mixin landscape
-{
-	@media only screen and (orientation: landscape) and (min-width: 600px)
-	{
-		@content;
-	}
-}
-
-@mixin landscape_hd
-{
-	@media only screen and (orientation: landscape) and (min-width: 1280px)
-	{
-		@content;
-	}
-}
-
-@mixin mobile
-{
-	@media screen and (orientation: portrait), screen and (max-width: 600px)
-	{
-		@content;
-	}
-}
-
 </style>

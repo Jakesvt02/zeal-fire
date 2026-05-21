@@ -19,7 +19,7 @@
     transform: translateX(-50%);
     left: 50%;
     bottom: 1.5em;
-    z-index: 2;
+    z-index: 10;
   }
   .carousel-indicator-item 
   {

@@ -3,7 +3,6 @@ import HomeView from "../views/home/HomeView.vue";
 import AboutView from "../views/about/AboutView.vue";
 import ContactView from "../views/contact/ContactView.vue";
 import ServicesView from "../views/services/ServicesView.vue";
-import ShopView from "@/views/shop/ShopView.vue";
 import GalleryView from "@/views/gallery/GalleryView.vue";
 
 const routes = [
@@ -33,11 +32,6 @@ const routes = [
     component:ContactView,
   },
   {
-    path:"/shop",
-    name:"shop",
-    component:ShopView
-  },
-  {
     path:"/gallery",
     name:"gallery",
     component:GalleryView
@@ -47,22 +41,10 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
-  scrollBehavior(to, from, next) 
-  {
-    if(next)
-    {
-      return next;
-    }
-    else if(to.hash)
-    {
-      const el = document.getElementById(to.hash.slice(1));
-      if (el) 
-      {
-        el.scrollIntoView({ behavior: 'smooth' });
-        // next(false); // Prevent further navigation
-      }
-    }
-    // next();
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) return savedPosition;
+    if (to.hash) return { el: to.hash, behavior: "smooth" };
+    return { top: 0, behavior: "smooth" };
   }
 });
 

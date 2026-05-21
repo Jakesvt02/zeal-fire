@@ -11,7 +11,6 @@
 
 <style lang="scss" scoped>
 
-@import "../styles";
 .main
 {
     display: flex;

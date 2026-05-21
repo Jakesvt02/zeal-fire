@@ -1,0 +1,25 @@
+// Phone portrait + any screen ≤ 600px
+@mixin mobile {
+  @media screen and (orientation: portrait), screen and (max-width: 600px) {
+    @content;
+  }
+}
+
+// Tablet and smaller (≤ 1024px) — use for layout shifts before full desktop
+@mixin tablet {
+  @media screen and (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin landscape {
+  @media only screen and (orientation: landscape) and (min-width: 600px) {
+    @content;
+  }
+}
+
+@mixin landscape_hd {
+  @media only screen and (orientation: landscape) and (min-width: 1280px) {
+    @content;
+  }
+}

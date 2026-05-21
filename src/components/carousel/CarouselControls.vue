@@ -12,8 +12,6 @@
   </script>
   <style lang="scss" scoped>
 
-   @import "../../styles";
-
   .button_holder
   {
     width: 100%;
